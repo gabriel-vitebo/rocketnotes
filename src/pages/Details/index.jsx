@@ -2,13 +2,16 @@ import { Container, Links } from "./style"
 
 import { Header } from "../../componets/header"
 import { Button } from "../../componets/button"
-import { Section } from "../../componets/Section"
 import { Tag } from "../../componets/Tag"
+import { Section } from "../../componets/Section"
+import { ButtonText } from "../../componets/ButtonText"
 
 export function Details() {
   return (
     <Container>
       <Header />
+
+      <ButtonText title="excluir nota" />
 
       <Section title="Links úteis">
         <Links>
