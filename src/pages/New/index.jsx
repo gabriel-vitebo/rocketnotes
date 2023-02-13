@@ -44,6 +44,23 @@ export function New() {
   }
 
   async function handleNewNote(){
+
+    if(!title){
+      return alert("Título é obrigatório")
+    }
+
+    if(newLink){
+      return alert("Clique para adicionar o link, ou o link será descartado")
+    }
+    if(newTag){
+      return alert("Clique para adicionar a tag, ou a tag será descartado")
+    }
+
+     if (!newLink || !newTag) {
+       alert("Nota criada com sucesso!")
+       navigate("/")
+     }
+
     await api.post("/notes", {
       title,
       description,
