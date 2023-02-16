@@ -50,6 +50,16 @@ export const Content = styled.div`
   grid-area: content;
   padding: 0 64px;
   overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.COLORS.ORANGE};
+    border-radius: .5rem;
+  }
 `
 export const NewNote = styled(Link)`
   grid-area: newnote;
