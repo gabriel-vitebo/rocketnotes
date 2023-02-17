@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import { api } from "../../services/api"
-import { useNavigate } from "react-router-dom" 
+import { useNavigate } from "react-router-dom"
 
 import { TextArea } from "../../componets/TextArea"
 import { NotesItem } from "../../componets/NotesItem"
 import { Section } from "../../componets/Section"
 import { Button } from "../../componets/button"
+import { ButtonText } from "../../componets/ButtonText"
 import { Header } from "../../componets/header"
 import { Input } from "../../componets/input"
 
@@ -16,7 +16,6 @@ export function New() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
-
   const [links, setLinks] = useState([])
   const [newLink, setNewLink] = useState("")
 
@@ -25,51 +24,54 @@ export function New() {
 
   const navigate = useNavigate()
 
-  function handleAddLink(){
-    setLinks(prevState => [...prevState, newLink])
+  function handleBack() {
+    navigate(-1)
+  }
+
+  function handleAddLink() {
+    setLinks((prevState) => [...prevState, newLink])
     setNewLink("")
   }
 
-  function handleRemoveLink(deleted){
-    setLinks(prevState => prevState.filter(link => link !== deleted))
+  function handleRemoveLink(deleted) {
+    setLinks((prevState) => prevState.filter((link) => link !== deleted))
   }
 
-  function handleAddTag(){
-    setTags(prevState => [...prevState, newTag])
+  function handleAddTag() {
+    setTags((prevState) => [...prevState, newTag])
     setNewTag("")
   }
 
-  function handleRemoveTag(deleted){
-    setTags(prevState => prevState.filter(tag => tag !== deleted))
+  function handleRemoveTag(deleted) {
+    setTags((prevState) => prevState.filter((tag) => tag !== deleted))
   }
 
-  async function handleNewNote(){
-
-    if(!title){
+  async function handleNewNote() {
+    if (!title) {
       return alert("Título é obrigatório")
     }
 
-    if(newLink){
+    if (newLink) {
       return alert("Clique para adicionar o link, ou o link será descartado")
     }
-    if(newTag){
+    if (newTag) {
       return alert("Clique para adicionar a tag, ou a tag será descartado")
     }
 
-     if (!newLink || !newTag) {
-       alert("Nota criada com sucesso!")
-       navigate("/")
-     }
+    if (!newLink || !newTag) {
+      alert("Nota criada com sucesso!")
+      navigate("/")
+    }
 
     await api.post("/notes", {
       title,
       description,
       tags,
-      links
+      links,
     })
 
     alert("Nota criada com sucesso!")
-    navigate("/")
+    navigate(-1)
   }
 
   return (
@@ -80,7 +82,7 @@ export function New() {
         <Form>
           <header>
             <h1>Criar Nota</h1>
-            <Link to="/">voltar</Link>
+            <ButtonText title="Voltar" onClick={handleBack} />
           </header>
 
           <Input

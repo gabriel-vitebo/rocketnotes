@@ -15,12 +15,21 @@ export function Details() {
   const params = useParams()
   const navigate = useNavigate()
 
-  function handleBack(){
-    navigate("/")
+  function handleBack() {
+    navigate(-1)
+  }
+
+  async function handleDelete() {
+    const confirm = window.confirm("Deseja deletar essa nota?")
+
+    if (confirm) {
+      await api.delete(`/notes/${params.id}`)
+      navigate(-1)
+    }
   }
 
   useEffect(() => {
-    async function fetchNote(){
+    async function fetchNote() {
       const response = await api.get(`/notes/${params.id}`)
       setData(response.data)
     }
@@ -31,54 +40,39 @@ export function Details() {
   return (
     <Container>
       <Header />
-      {
-        data &&
+      {data && (
         <main>
           <Content>
-            <ButtonText title="excluir nota" />
+            <ButtonText onClick={handleDelete} title="excluir nota" />
 
             <h1>{data.title}</h1>
 
-            <p>
-              {data.description}
-            </p>
+            <p>{data.description}</p>
 
-            {
-              data.links &&
-              <Section title="Links úteis">     
-                  <Links>
-                  {
-                    data.links.map(link => (
-                      <li key={String(link.id)}>
-                        <a href={link.url}>
-                          {link.url}
-                        </a>
-                      </li>
-                    ))
-                  }
-                  </Links>
+            {data.links && (
+              <Section title="Links úteis">
+                <Links>
+                  {data.links.map((link) => (
+                    <li key={String(link.id)}>
+                      <a href={link.url}>{link.url}</a>
+                    </li>
+                  ))}
+                </Links>
               </Section>
-            }
+            )}
 
-            {
-              data.tags &&
+            {data.tags && (
               <Section title="Marcadores">
-                {
-                  data.tags.map(tag => (
-                    <Tag 
-                    key={String(tag.id)}
-                    title={tag.name} />
-                  ))
-                }
+                {data.tags.map((tag) => (
+                  <Tag key={String(tag.id)} title={tag.name} />
+                ))}
               </Section>
-            }
+            )}
 
-            <Button 
-            onClick={handleBack}
-            title="voltar" />
+            <Button onClick={handleBack} title="voltar" />
           </Content>
         </main>
-      }
+      )}
     </Container>
   )
 }

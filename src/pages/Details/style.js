@@ -35,7 +35,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  > button:first-child{
+  > button:first-child {
     align-self: flex-end;
   }
 
@@ -45,7 +45,7 @@ export const Content = styled.div`
     padding-top: 64px;
   }
 
-  >p {
+  > p {
     font-size: 16px;
     margin-top: 16px;
     text-align: justify;
