@@ -66,7 +66,6 @@ export function New() {
       links,
     })
 
-    console.log("entro aqui")
     alert("Nota criada com sucesso!")
     navigate(-1)
   }
