@@ -1,5 +1,6 @@
 import axios from "axios"
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_HOST,
+  baseURL: "https://newrocketnotes.netlify.app/",
+  // baseURL: import.meta.env.VITE_API_HOST,
 })
