@@ -54,20 +54,9 @@ export function New() {
     if (newLink) {
       return alert("Clique para adicionar o link, ou o link será descartado")
     }
+
     if (newTag) {
       return alert("Clique para adicionar a tag, ou a tag será descartado")
-    }
-
-    if (newLink === "" || newTag === "") {
-      alert("Nota criada com sucesso!")
-      navigate(-1)
-      await api.post("/notes", {
-        title,
-        description,
-        tags,
-        links,
-      })
-      return
     }
 
     await api.post("/notes", {
@@ -77,6 +66,7 @@ export function New() {
       links,
     })
 
+    console.log("entro aqui")
     alert("Nota criada com sucesso!")
     navigate(-1)
   }

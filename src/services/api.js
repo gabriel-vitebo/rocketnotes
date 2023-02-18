@@ -1,5 +1,5 @@
 import axios from "axios"
 
 export const api = axios.create({
-  baseURL: "https://rocketnotes-api-1dbx.onrender.com",
+  baseURL: import.meta.env.VITE_API_HOST,
 })
